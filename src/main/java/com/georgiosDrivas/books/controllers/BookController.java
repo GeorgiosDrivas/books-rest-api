@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.Optional;
 
 @Controller
 public class BookController {
@@ -26,4 +29,11 @@ public class BookController {
         final BookModel savedBook = bookService.create(book);
         return new ResponseEntity<BookModel>(savedBook, HttpStatus.CREATED);
     }
+
+    @GetMapping(path = "/books/{isbn}")
+    public ResponseEntity<BookModel> retrieveBook(@PathVariable final String isbn){
+        final Optional<BookModel> foundBook = bookService.findById(isbn);
+        return foundBook.map(book -> new ResponseEntity<BookModel>(book, HttpStatus.OK))
+                .orElse(new ResponseEntity<BookModel>(HttpStatus.NOT_FOUND));
+    };
 }
