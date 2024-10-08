@@ -17,3 +17,6 @@ The user can store, edit and delete books by providing:
 - "/books/{id}" => provides the specified id's book. 
   If the ID is in the database, it updates the book.
 - "/books/delete/{id}" => deletes the specified id's book
+
+Tested with Postman. 
+Work in progress.
