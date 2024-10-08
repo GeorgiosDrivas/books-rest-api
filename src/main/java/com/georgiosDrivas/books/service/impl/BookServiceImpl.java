@@ -38,4 +38,9 @@ public class BookServiceImpl implements BookService {
     public boolean isBookExists(BookModel book) {
         return bookRepository.existsById(book.getIsbn());
     }
+
+    @Override
+    public void deleteBookById(String isbn) {
+        bookRepository.deleteById(isbn);
+    }
 }

@@ -13,4 +13,6 @@ public interface BookService {
     List<BookModel> listAllBooks();
 
     boolean isBookExists(BookModel book);
+
+    void deleteBookById(String isbn);
 }
