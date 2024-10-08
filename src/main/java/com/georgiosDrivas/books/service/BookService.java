@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BookService {
-    BookModel create(BookModel book);
+    BookModel save(BookModel book);
 
     Optional<BookModel> findById(String isbn);
 
     List<BookModel> listAllBooks();
+
+    boolean isBookExists(BookModel book);
 }

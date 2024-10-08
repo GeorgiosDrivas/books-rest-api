@@ -24,13 +24,6 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @PutMapping(path = "/books/{isbn}")
-    public ResponseEntity<BookModel> createBook(@PathVariable final String isbn, @RequestBody final BookModel book){
-        book.setIsbn(isbn);
-        final BookModel savedBook = bookService.create(book);
-        return new ResponseEntity<BookModel>(savedBook, HttpStatus.CREATED);
-    }
-
     @GetMapping(path = "/books/{isbn}")
     public ResponseEntity<BookModel> retrieveBook(@PathVariable final String isbn){
         final Optional<BookModel> foundBook = bookService.findById(isbn);
@@ -41,5 +34,19 @@ public class BookController {
     @GetMapping(path = "/books")
     public ResponseEntity<List<BookModel>> listBooks(){
         return new ResponseEntity<List<BookModel>>(bookService.listAllBooks(), HttpStatus.OK);
+    }
+
+    @PutMapping(path = "/books/{isbn}")
+    public ResponseEntity<BookModel> createUpdateBook(@PathVariable final String isbn, @RequestBody final BookModel book){
+        book.setIsbn(isbn);
+        final boolean isBookExists = bookService.isBookExists(book);
+        final BookModel savedBook = bookService.save(book);
+
+        if(isBookExists){
+            return new ResponseEntity<BookModel>(savedBook, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<BookModel>(savedBook, HttpStatus.CREATED);
+        }
+
     }
 }
