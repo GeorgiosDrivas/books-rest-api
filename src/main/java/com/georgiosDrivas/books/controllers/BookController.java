@@ -28,7 +28,7 @@ public class BookController {
                 .orElse(new ResponseEntity<BookModel>(HttpStatus.NOT_FOUND));
     };
 
-    @GetMapping(path = "/books")
+    @GetMapping(path = "/all-books")
     public ResponseEntity<List<BookModel>> listBooks(){
         return new ResponseEntity<List<BookModel>>(bookService.listAllBooks(), HttpStatus.OK);
     }
@@ -47,7 +47,7 @@ public class BookController {
 
     }
 
-    @DeleteMapping(path = "/books/{isbn}")
+    @DeleteMapping(path = "/books/delete/{isbn}")
     public ResponseEntity deleteBook(@PathVariable final String isbn){
         bookService.deleteBookById(isbn);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
