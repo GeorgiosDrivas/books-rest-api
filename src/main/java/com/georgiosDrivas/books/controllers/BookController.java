@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -36,4 +37,9 @@ public class BookController {
         return foundBook.map(book -> new ResponseEntity<BookModel>(book, HttpStatus.OK))
                 .orElse(new ResponseEntity<BookModel>(HttpStatus.NOT_FOUND));
     };
+
+    @GetMapping(path = "/books")
+    public ResponseEntity<List<BookModel>> listBooks(){
+        return new ResponseEntity<List<BookModel>>(bookService.listAllBooks(), HttpStatus.OK);
+    }
 }

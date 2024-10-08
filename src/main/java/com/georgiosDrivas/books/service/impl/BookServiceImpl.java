@@ -6,6 +6,7 @@ import com.georgiosDrivas.books.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,5 +27,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public Optional<BookModel> findById(String isbn) {
         return bookRepository.findById(isbn);
+    }
+
+    @Override
+    public List<BookModel> listAllBooks() {
+        return bookRepository.findAll();
     }
 }
