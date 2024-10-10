@@ -13,9 +13,9 @@ The user can store, edit and delete books by providing:
 
 ## Endpoints
 - "/books/{id}" => creates a book ( with body).
-- "/all-books" => provides all stored books
-- "/books/{id}" => provides the specified id's book. 
   If the ID is in the database, it updates the book.
+- "/all-books" => provides all stored books
+- "/books/book-{id}" => retrieves a specific book.
 - "/books/delete/{id}" => deletes the specified id's book
 
 Tested with Postman. 

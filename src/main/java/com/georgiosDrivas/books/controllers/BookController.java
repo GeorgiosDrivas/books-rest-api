@@ -21,7 +21,7 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping(path = "/books/{isbn}")
+    @GetMapping(path = "/books/book-{isbn}")
     public ResponseEntity<BookModel> retrieveBook(@PathVariable final String isbn){
         final Optional<BookModel> foundBook = bookService.findById(isbn);
         return foundBook.map(book -> new ResponseEntity<BookModel>(book, HttpStatus.OK))
